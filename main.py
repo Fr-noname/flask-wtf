@@ -23,5 +23,12 @@ def training(prof):
                            image_dir=image_dir)
 
 
+@app.route('/list_prof/<type_prof>')
+def list_profs(type_prof):
+    list_prof = ["Ведьмак", "Раб_1", "Раб_2", "Раб_3", "Рабовладелец", "Чернорабочий",
+                 "Шахтер", "Повар", "Собиратель", "Воин", "Едаделатель", "Приготовитель"]
+    return render_template("list_prof.html", list_prof=list_prof, types=type_prof)
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
