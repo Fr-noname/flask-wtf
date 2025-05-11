@@ -1,4 +1,3 @@
-
 from flask import render_template, Flask, url_for
 
 app = Flask(__name__)
@@ -28,6 +27,17 @@ def list_profs(type_prof):
     list_prof = ["Ведьмак", "Раб_1", "Раб_2", "Раб_3", "Рабовладелец", "Чернорабочий",
                  "Шахтер", "Повар", "Собиратель", "Воин", "Едаделатель", "Приготовитель"]
     return render_template("list_prof.html", list_prof=list_prof, types=type_prof)
+
+
+@app.route('/auto_answer')
+@app.route('/answer')
+def answer():
+    return render_template("answer.html", title="Анкета", person={'surname': 'QW', 'name': 'bob',
+                                                                  'education': 'high',
+                                                                  'profession': 'inhere', 'sex': 'male',
+                                                                  'motivation': 'Want',
+                                                                  'ready': 'True'},
+                           css=url_for('static', filename='css/answer_style.css'))
 
 
 if __name__ == '__main__':
