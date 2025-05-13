@@ -51,6 +51,11 @@ def login():
                            img=url_for('static', filename='img/photo.png'))
 
 
+@app.route('/distribution')
+def distribution():
+    user_list = ["Акакий", "Ясос Б.", "Яна Ц.", "Даздраперма", "Персострат"]
+    return render_template('distribution.html', title='Расселение', user_list=user_list)
+
 
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
