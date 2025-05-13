@@ -1,4 +1,5 @@
-from flask import render_template, Flask, url_for
+from flask import render_template, Flask, url_for, redirect
+from classes import *
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandex_lyceum_secret_key'
@@ -38,6 +39,17 @@ def answer():
                                                                   'motivation': 'Want',
                                                                   'ready': 'True'},
                            css=url_for('static', filename='css/answer_style.css'))
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        return redirect('/login')
+    return render_template('login.html', title='Авторизация', form=form,
+                           css=url_for('static', filename='css/aut_style.css'),
+                           img=url_for('static', filename='img/photo.png'))
+
 
 
 if __name__ == '__main__':
