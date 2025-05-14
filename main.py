@@ -1,4 +1,6 @@
-from flask import render_template, Flask, url_for, redirect
+import os
+
+from flask import render_template, Flask, url_for, redirect, request
 from classes import *
 
 app = Flask(__name__)
@@ -74,6 +76,16 @@ def table(sex, year):
     return render_template('table.html', title='Дизайн', css=url_for("static", filename="css/table.css"),
                            img=url_for("static", filename=f"img/{img}"),
                            img2=url_for("static", filename=f"img/{img2}"))
+
+
+@app.route('/galery', methods=['POST', 'GET'])
+def galery():
+    if request.method == 'POST':
+        f = request.files['file']
+        f.save(f"static/img/cash/{len(os.listdir('static/img/shlack'))}.png")
+    return render_template('galery.html', title='Дизайн',
+                           imgs=[url_for("static", filename=f"img/shlack/{file}")
+                                 for file in os.listdir('static/img/shlack')])
 
 
 if __name__ == '__main__':
